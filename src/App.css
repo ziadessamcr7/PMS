@@ -1,6 +1,41 @@
-.auth-container {
-  background-image: url(./assets/images/auth-bg.png);
+#login {
+  background-image: url('assets/images/bg3.png');
+  height: 100vh;
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
+}
+
+.from-bg {
+  background-color: rgb(27 69 53 / 93%);
+}
+
+.form-input {
+  width: 100%;
+  background-color: transparent;
+  border-width: 1px;
+  border-color: rgb(227 156 26);
+  border-style: none none solid none;
+  padding-bottom: 10px;
+  outline: 0;
+}
+
+.form-button {
+  background-color: rgb(227 156 26) !important;
+  color: white !important;
+  width: 80%;
+  display: block !important;
+  margin: auto !important;
+}
+
+::placeholder {
+  color: white;
+}
+
+.login-underline {
+  width: 14px;
+  height: 5px;
+  background-color: rgb(227 156 26);
+  display: block;
+  margin-bottom: 25px;
 }
