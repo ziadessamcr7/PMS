@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form'
 import logo from '../../../src/assets/images/PMS 3.png'
-
+import './Login.module.css'
 
 
 export default function Login() {
@@ -10,9 +10,9 @@ export default function Login() {
     register,
     handleSubmit,
     formState: { errors }
-  } = useForm()
+  }: any = useForm()
 
-  const Loginform = (data) => {
+  const Loginform = (data: any) => {
     console.log(data);
   }
 
