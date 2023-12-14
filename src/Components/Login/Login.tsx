@@ -1,19 +1,33 @@
-import { useForm } from 'react-hook-form'
+import { useContext, useState } from 'react';
 import logo from '../../../src/assets/images/PMS 3.png'
-
+import {useForm,useNavigate,toast} from '../../Utls/index.ts'
+import { AuthContext } from '../../Context/AuthContext';
+import axios from 'axios';
+import Loading from '../Loading/Loading.js';
 
 
 export default function Login() {
-
-
+  let {url,saveUserData}:any=useContext(AuthContext);
+  let navigate =useNavigate();
+  const [isLoading, setIsLoading] = useState(false)
   const {
     register,
     handleSubmit,
     formState: { errors }
-  } = useForm()
+  } = useForm();
 
-  const Loginform = (data) => {
-    console.log(data);
+  const logIn = (data:object) => {
+    setIsLoading(true)
+    axios.post(`${url}Users/Login`,data).then(res=>{
+      localStorage.setItem("userTkn",res.data.token);
+      setIsLoading(false);
+      saveUserData();
+      toast.success("Successfuly");
+      navigate("/dashboard");
+    }).catch(err=>{
+      setIsLoading(false);
+      toast.error(err.response.data.message||"faild");
+    })
   }
 
   return (
@@ -30,9 +44,9 @@ export default function Login() {
               <h2 className="p-0 m-0" style={{ color: 'rgb(227 156 26)' }} >Login</h2>
               <span className="login-underline"></span>
 
-              <form onSubmit={handleSubmit(Loginform)}>
+              <form onSubmit={handleSubmit(logIn)}>
                 <label htmlFor="mail" style={{ color: 'rgb(227 156 26)' }}>Email</label>
-                <input className="form-input"
+                <input className="form-control"
                   type="email"
                   placeholder="Enter your e-mail"
                   id="mail" {...register('email', {
@@ -45,7 +59,7 @@ export default function Login() {
                 }
 
                 <label htmlFor="password" className="mt-4" style={{ color: 'rgb(227 156 26)' }}>Passwrod</label>
-                <input className="form-input"
+                <input className="form-control"
                   type="password"
                   placeholder="Enter your password"
                   id="password"
@@ -59,7 +73,7 @@ export default function Login() {
                   <span className='text-danger'> enter a vlaid password </span>}
 
                 <p className="text-end mb-5 text-white mt-2">Forgot Password?</p>
-                <button className="form-button btn rounded-5">Login</button>
+                <button className="form-button btn rounded-5">{isLoading?<Loading/>:"Login"}</button>
               </form>
 
             </div>
