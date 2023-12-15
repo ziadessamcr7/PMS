@@ -1,7 +1,7 @@
-import React from 'react'
+/** @format */
+
+import React from "react";
 
 export default function ChangePassword() {
-  return (
-    <div>ChangePassword</div>
-  )
+  return <div className="main-screen">ChangePassword</div>;
 }

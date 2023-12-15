@@ -1,5 +1,14 @@
+/** @format */
+
+.main-screen {
+  background-image: url("assets/images/bg3.png");
+  height: 100vh;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
 #login {
-  background-image: url('assets/images/bg3.png');
+  background-image: url("assets/images/bg3.png");
   height: 100vh;
   background-size: cover;
   background-position: center center;
@@ -54,4 +63,16 @@ textarea {
 
 .ps-sidebar-container .ps-menu-button:hover {
   background-color: rgba(207, 155, 10, 0.438) !important;
+}
+.MuiInputLabel-root {
+  color: orange !important;
+}
+.css-l4u8b9-MuiInputBase-root-MuiInput-root {
+  color: white !important;
+}
+.css-l4u8b9-MuiInputBase-root-MuiInput-root:hover:not(
+    .Mui-disabled,
+    .Mui-error
+  ):before {
+  border-bottom: 1px solid rgb(177 169 16) !important;
 }
