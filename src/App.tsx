@@ -12,35 +12,45 @@ import Dashboard from './Components/Dashboard/Dashboard';
 import Projects from './Components/Projects/Projects';
 import Users from './Components/Users/Users';
 import Tasks from './Components/Tasks/Tasks';
+import ProtectedRoute from './Components/ProtectedRoute/ProtectedRoute';
+import { useContext } from 'react';
+import { AuthContext } from './Context/AuthContext';
+
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
 
+  let { userData, saveUserData }: any = useContext(AuthContext)
+
   const routes = createBrowserRouter([{
-     path:'/',
-     element:<AuthLayout/>,
-     errorElement:<Notfound/>,
-     children:[
-      {index:true,element:<Login/>},
-      {path:'login',element:<Login/>},
-      {path:'register',element:<Register/>},
-      {path:'request-reset',element:<RequestReset/>},
-      {path:'reset-password',element:<ResetPassword/>},
-      {path:'verify-user',element:<VerifyUser/>},
-     ]
-  },{
-    path:'dashboard',
-    element:<MasterLayout/>,
-    errorElement:<Notfound/>,
-    children:[
-     {index:true,element:<Dashboard/>},
-     {path:'projects',element:<Projects/>},
-     {path:'users',element:<Users/>},
-     {path:'tasks',element:<Tasks/>},
+    path: '/',
+    element: <AuthLayout />,
+    errorElement: <Notfound />,
+    children: [
+      { index: true, element: <Login /> },
+      { path: 'login', element: <Login /> },
+      { path: 'register', element: <Register /> },
+      { path: 'request-reset', element: <RequestReset /> },
+      { path: 'reset-password', element: <ResetPassword /> },
+      { path: 'verify-user', element: <VerifyUser /> },
+    ]
+  }, {
+    path: 'dashboard',
+    element: <ProtectedRoute userData={userData}>
+      <MasterLayout />
+    </ProtectedRoute>,
+    errorElement: <Notfound />,
+    children: [
+      { index: true, element: <Dashboard /> },
+      { path: 'projects', element: <Projects /> },
+      { path: 'users', element: <Users /> },
+      { path: 'tasks', element: <Tasks /> },
     ]
   }]);
 
   return (
-   <RouterProvider router={routes}/>
+    <RouterProvider router={routes} />
   )
 }
 
