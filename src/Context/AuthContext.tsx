@@ -7,7 +7,7 @@ export default function AuthContextProvider(props:any){
 
     const url =`http://upskilling-egypt.com:3003/api/v1/`
     const [userData, setUserData] = useState();
-
+    let headers={headers:{Authorization:`Bearer ${localStorage.getItem("userTkn")}`}}
     function saveUserData(){
         let encodedData =localStorage.getItem("userTkn");
         let decodedData =jwtDecode(encodedData);
@@ -21,7 +21,7 @@ export default function AuthContextProvider(props:any){
     
 
 
-    return <AuthContext.Provider value={{url,userData,saveUserData}}> 
+    return <AuthContext.Provider value={{headers,url,userData,saveUserData}}> 
     {props.children}
      </AuthContext.Provider>
 }
