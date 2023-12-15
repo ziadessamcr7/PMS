@@ -11,7 +11,6 @@ import { toast } from 'react-toastify';
 
 export default function Register() {
 
-  // let { BaseUrl, saveUserData }: any = useContext(AuthContext);
   let navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false)
 
