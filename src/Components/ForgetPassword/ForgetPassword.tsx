@@ -8,6 +8,7 @@ import { Button, Col, Container, Row } from "react-bootstrap";
 import logo from "../../assets/images/PMS 3.png";
 import Loading from "../Loading/Loading";
 import axios from "axios";
+import DynamicInputs from "../../Shared/PasswordInput/DynamicInputs";
 
 const ForgetPassword = () => {
   let { BaseUrl, saveUserData, requestHeaders }: any = useContext(AuthContext);
@@ -54,22 +55,11 @@ const ForgetPassword = () => {
               </h2>
               <span className="login-underline"></span>
               <Form onSubmit={handleSubmit(forgetPasswordForm)}>
-                <label
-                  htmlFor="mail"
-                  className="fw-bold"
-                  style={{ color: "rgb(227 156 26)" }}
-                >
-                  Email
-                </label>
-                <input
-                  className="form-input"
-                  type="email"
-                  placeholder="Enter your e-mail"
-                  id="mail"
-                  {...register("email", {
-                    required: "email required",
-                    pattern: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
-                  })}
+                <DynamicInputs
+                  register={register}
+                  label={"Email"}
+                  placeholder={"Enter your E-mail"}
+                  value={"email"}
                 />
                 {errors.email && errors.email.type === "required" && (
                   <span className="text-danger d-block">Email is required</span>

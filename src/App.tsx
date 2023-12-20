@@ -6,7 +6,7 @@ import AuthLayout from "./Shared/AuthLayout/AuthLayout";
 import Login from "./Components/Login/Login";
 import Register from "./Components/Register/Register";
 import RequestReset from "./Components/RequestReset/RequestReset";
-import ResetPassword from "./Components/ResetPassword/ResetPassword";
+import ResetPassword from "./Components/DynamicInputs/ResetPassword";
 import VerifyUser from "./Components/VerifyUser/VerifyUser";
 import Notfound from "./Shared/NotFound/Notfound";
 import MasterLayout from "./Shared/MasterLayout/MasterLayout";

@@ -3,18 +3,18 @@
 import React from "react";
 
 import { useState, useContext } from "react";
-import { AuthContext } from "../../Context/AuthContext";
+// import { AuthContext } from "../../Context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { Form, Button, Col, Container, Row } from "react-bootstrap";
 import logo from "../../assets/images/PMS 3.png";
 import Loading from "../Loading/Loading";
 import axios from "axios";
-import PasswordInput from "../../Shared/PasswordInput/PasswordInput";
 import { toast } from "react-toastify";
+import DynamicInputs from "../../Shared/PasswordInput/DynamicInputs";
 
 export default function ResetPassword() {
-  let { BaseUrl, saveUserData, requestHeaders }: any = useContext(AuthContext);
+  // let { BaseUrl, saveUserData, requestHeaders }: any = useContext(AuthContext);
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -31,12 +31,13 @@ export default function ResetPassword() {
         toast.success("reset Password success", {
           autoClose: 2000,
         });
+        console.log(response);
         navigate("/login");
         setIsLoading(false);
       })
       .catch((error) => {
-        console.log(error);
-        toast.error("Failed to reset password. Please try again.");
+        toast.error(error?.response?.data?.message);
+        setIsLoading(false);
       });
   };
   return (
@@ -52,29 +53,19 @@ export default function ResetPassword() {
               />
             </div>
             <div className="from-bg p-5 rounded-3">
-              <span className="text-white">welcome to PMS</span>
+              <span className="text-white text-capitalize">welcome to PMS</span>
               <h2 className="p-0 m-0" style={{ color: "rgb(227 156 26)" }}>
                 Forget Password
               </h2>
               <span className="login-underline"></span>
               <Form onSubmit={handleSubmit(resetPasswordForm)}>
-                <label
-                  htmlFor="mail"
-                  className="fw-bold"
-                  style={{ color: "rgb(227 156 26)" }}
-                >
-                  Email
-                </label>
-                <input
-                  className="form-input"
-                  type="email"
-                  placeholder="Enter your e-mail"
-                  id="mail"
-                  {...register("email", {
-                    required: "email required",
-                    pattern: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
-                  })}
+                <DynamicInputs
+                  register={register}
+                  label={"Email"}
+                  placeholder={"Enter your E-mail"}
+                  value={"email"}
                 />
+
                 {errors.email && errors.email.type === "required" && (
                   <span className="text-danger d-block">Email is required</span>
                 )}
@@ -83,8 +74,8 @@ export default function ResetPassword() {
                     Enter a valid email
                   </span>
                 )}
-                <div>
-                  <PasswordInput
+                <div className="">
+                  <DynamicInputs
                     register={register}
                     label={"OPT Verification"}
                     placeholder={"Enter Verification"}
@@ -95,7 +86,7 @@ export default function ResetPassword() {
                   )}
                 </div>
                 <div>
-                  <PasswordInput
+                  <DynamicInputs
                     register={register}
                     label={" Password"}
                     placeholder={"Enter Your password"}
@@ -108,16 +99,16 @@ export default function ResetPassword() {
                   )}
                 </div>
                 <div>
-                  <PasswordInput
+                  <DynamicInputs
                     register={register}
-                    label={"confirm Password"}
+                    label={"Confirm Password"}
                     placeholder={"Enter confirm Password"}
                     value={"confirmPassword"}
                   />
                   {errors.confirmPassword &&
                     errors.confirmPassword?.type === "required" && (
                       <span className="text-danger">
-                        the confirm Password is required{" "}
+                        the Confirm Password is required
                       </span>
                     )}
                 </div>
