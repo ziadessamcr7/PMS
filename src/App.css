@@ -5,6 +5,13 @@
   background-position: center center;
   background-repeat: no-repeat;
 }
+thead{
+  background-color: rgba(49, 89, 81, 0.9) !important;
+}
+th{
+  background-color: rgba(49, 89, 81, 0.9) !important;
+  color:  rgba(255, 255, 255, 1)  !important;
+}
 
 .from-bg {
   background-color: rgb(27 69 53 / 93%);

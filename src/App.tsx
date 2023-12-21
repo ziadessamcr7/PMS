@@ -13,6 +13,7 @@ import Projects from './Components/Projects/Projects';
 import Users from './Components/Users/Users';
 import Tasks from './Components/Tasks/Tasks';
 import ProtectedRoute from './Components/ProtectedRoute/ProtectedRoute';
+import View from './Components/View/View';
 
 function App() {
 
@@ -36,6 +37,7 @@ function App() {
      {index:true,element:<Dashboard/>},
      {path:'projects',element:<Projects/>},
      {path:'users',element:<Users/>},
+     {path:"user-details/:id",element:<View/>},
      {path:'tasks',element:<Tasks/>},
     ]
   }]);

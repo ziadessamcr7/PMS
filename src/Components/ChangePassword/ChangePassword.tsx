@@ -14,13 +14,6 @@ export default function ChangePassword({show,handleClose}) {
   let {url,headers}:any=useContext(AuthContext);
 
 
-
-
-
-
-
-
-
   let {
     register,
     handleSubmit,
