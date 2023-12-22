@@ -15,7 +15,6 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import useMediaQuery from "@mui/material/useMediaQuery";
-
 const pages = ["Products", "Pricing", "Blog"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
@@ -75,7 +74,7 @@ export default function NavBar() {
               onClick={handleOpenNavMenu}
               color="inherit"
             >
-              <MenuIcon />
+              {/* <img src={} alt="" /> */}
             </IconButton>
             <Menu
               id="menu-appbar"
