@@ -8,6 +8,8 @@ import { AuthContext } from "../../Context/AuthContext.tsx";
 
 export default function ChangePassword({ show, handleClose }) {
   let { url, headers }: any = useContext(AuthContext);
+
+  // >>>>>>> ee9d7c038b4cb2d404b7faba6a5d6d21196c2c32
   let {
     register,
     handleSubmit,
