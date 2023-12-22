@@ -114,8 +114,21 @@ function ResponsiveAppBar() {
                 ))}
               </Menu>
             </Box>
-
-            <Box sx={{ flexGrow: 0, display: { xs: "none", md: "flex" } }}>
+            <Typography
+              noWrap
+              component="div"
+              sx={{
+                mr: 2,
+                my: 2,
+                display: { xs: "flex", md: "none" },
+                flexGrow: 1,
+                color: "inherit",
+                textDecoration: "none",
+              }}
+            >
+              <img className="w-75" src={navLogo} alt="navbar Logo" />
+            </Typography>
+            <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
               {pages.map((page) => (
                 <Button
                   key={page}
@@ -126,22 +139,6 @@ function ResponsiveAppBar() {
                 </Button>
               ))}
             </Box>
-            <Box>
-              <Typography
-                noWrap
-                component="div"
-                sx={{
-                  mr: 0,
-                  my: 2,
-                  display: { xs: "flex", md: "none" },
-                  flexGrow: 1,
-                  color: "inherit",
-                  textDecoration: "none",
-                }}
-              >
-                <img className="w-75" src={navLogo} alt="navbar Logo" />
-              </Typography>
-            </Box>
             <Box sx={{ flexGrow: 0 }}>
               <MenuItem>
                 <IconButton
@@ -149,7 +146,7 @@ function ResponsiveAppBar() {
                   aria-label="show 17 new notifications"
                   color="inherit"
                 >
-                  <Badge badgeContent={2} color="info">
+                  <Badge badgeContent={2} color="success">
                     <NotificationsIcon />
                   </Badge>
                 </IconButton>
@@ -162,7 +159,7 @@ function ResponsiveAppBar() {
                     alt="Remy Sharp"
                     // src="/static/images/avatar/2.jpg"
                   />
-                  <span className="mx-3 text-light">Yousef</span>
+                  <span className="mx-3 text-light fs-5">Yousef</span>
                 </IconButton>
               </Tooltip>
               <Menu
