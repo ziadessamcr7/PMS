@@ -1,0 +1,7 @@
+/** @format */
+
+.navBoard {
+  width: 200px;
+  border-left: 2px double rgb(0, 0, 0);
+  margin-left: 5rem;
+}
