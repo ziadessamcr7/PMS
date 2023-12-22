@@ -59,14 +59,13 @@ function ResponsiveAppBar() {
       <AppBar position="static" color="primary">
         <Container maxWidth="xl">
           <Toolbar disableGutters>
-            {/* <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} /> */}
             <Typography
-              variant="h6"
               noWrap
-              component="a"
-              href="#app-bar-with-responsive-menu"
+              component="div"
               sx={{
                 mr: 2,
+                my: 2,
+
                 display: { xs: "none", md: "flex" },
                 fontFamily: "monospace",
                 fontWeight: 700,
@@ -115,26 +114,8 @@ function ResponsiveAppBar() {
                 ))}
               </Menu>
             </Box>
-            <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
-            <Typography
-              variant="h5"
-              noWrap
-              component="a"
-              href="#app-bar-with-responsive-menu"
-              sx={{
-                mr: 2,
-                display: { xs: "flex", md: "none" },
-                flexGrow: 1,
-                fontFamily: "monospace",
-                fontWeight: 700,
-                letterSpacing: ".3rem",
-                color: "inherit",
-                textDecoration: "none",
-              }}
-            >
-              LOGO
-            </Typography>
-            <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+
+            <Box sx={{ flexGrow: 0, display: { xs: "none", md: "flex" } }}>
               {pages.map((page) => (
                 <Button
                   key={page}
@@ -145,6 +126,22 @@ function ResponsiveAppBar() {
                 </Button>
               ))}
             </Box>
+            <Box>
+              <Typography
+                noWrap
+                component="div"
+                sx={{
+                  mr: 0,
+                  my: 2,
+                  display: { xs: "flex", md: "none" },
+                  flexGrow: 1,
+                  color: "inherit",
+                  textDecoration: "none",
+                }}
+              >
+                <img className="w-75" src={navLogo} alt="navbar Logo" />
+              </Typography>
+            </Box>
             <Box sx={{ flexGrow: 0 }}>
               <MenuItem>
                 <IconButton
@@ -152,7 +149,7 @@ function ResponsiveAppBar() {
                   aria-label="show 17 new notifications"
                   color="inherit"
                 >
-                  <Badge badgeContent={17} color="info">
+                  <Badge badgeContent={2} color="info">
                     <NotificationsIcon />
                   </Badge>
                 </IconButton>
