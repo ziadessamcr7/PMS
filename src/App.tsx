@@ -21,10 +21,12 @@ import { AuthContext } from "./Context/AuthContext";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ForgetPassword from "./Components/ForgetPassword/ForgetPassword";
-
+interface IAuth {
+  userData: string;
+}
 function App() {
-  let { userData, saveUserData }: any = useContext(AuthContext);
-
+  let { userData }: IAuth = useContext(AuthContext);
+  console.log(userData);
   const routes = createBrowserRouter([
     {
       path: "/",
