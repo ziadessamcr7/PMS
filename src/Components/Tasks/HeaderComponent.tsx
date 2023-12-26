@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { Col, Row, Button } from "react-bootstrap";
 import { useLocation } from "react-router-dom";
 
-const TaskHeader = ({ showAddModal, pageBtn }) => {
+const HeaderComponent = ({ showAddModal, pageBtn }) => {
   const [pageName, setPageName] = useState();
   const location = useLocation();
   const { pathname } = location;
@@ -34,4 +34,4 @@ const TaskHeader = ({ showAddModal, pageBtn }) => {
   );
 };
 
-export default TaskHeader;
+export default HeaderComponent;

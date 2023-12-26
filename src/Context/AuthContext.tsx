@@ -1,7 +1,13 @@
 /** @format */
 
 import { jwtDecode } from "jwt-decode";
-import { createContext, useEffect, useState } from "react";
+import {
+  createContext,
+  useEffect,
+  useState,
+  useCallback,
+  useMemo,
+} from "react";
 import {
   IAuthContextValue,
   IAuthContextProviderProps,
@@ -9,35 +15,38 @@ import {
 
 export const AuthContext = createContext<IAuthContextValue | null>(null);
 
+const BaseUrl = `http://upskilling-egypt.com:3003/api/v1`;
+const requestHeaders: Record<string, string> = {
+  Authorization: `Bearer ${localStorage.getItem("userTkn") || ""}`,
+};
+
 export default function AuthContextProvider(props: IAuthContextProviderProps) {
-  const BaseUrl = `http://upskilling-egypt.com:3003/api/v1`;
   const [userData, setUserData] = useState<string | undefined>();
   const [userRoll, setUserRoll] = useState<string | undefined>();
-  const requestHeaders = {
-    Authorization: `Bearer ${localStorage.getItem("userTkn")}`,
-  };
-  function saveUserData() {
+
+  const saveUserData = useCallback(() => {
     const encodedData: any = localStorage.getItem("userTkn");
     const decodedData: any = jwtDecode(encodedData);
     setUserData(decodedData);
-    setUserRoll(userData?.userGroup);
-  }
+    setUserRoll(decodedData?.userGroup);
+  }, []);
+
   useEffect(() => {
     if (localStorage.getItem("userTkn")) {
       saveUserData();
     }
   }, []);
-
+  const contextValue = useMemo(() => {
+    return {
+      BaseUrl,
+      userData,
+      saveUserData,
+      requestHeaders,
+      userRoll,
+    };
+  }, [BaseUrl, userData, saveUserData, requestHeaders, userRoll]);
   return (
-    <AuthContext.Provider
-      value={{
-        BaseUrl,
-        userData,
-        saveUserData,
-        requestHeaders,
-        userRoll,
-      }}
-    >
+    <AuthContext.Provider value={contextValue}>
       {props.children}
     </AuthContext.Provider>
   );
