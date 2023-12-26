@@ -26,7 +26,6 @@ interface IAuth {
 }
 function App() {
   let { userData }: IAuth = useContext(AuthContext);
-  console.log(userData);
   const routes = createBrowserRouter([
     {
       path: "/",

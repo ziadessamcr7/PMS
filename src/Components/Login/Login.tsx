@@ -30,7 +30,6 @@ export default function Login() {
     axios
       .post(`${BaseUrl}/Users/Login`, data)
       .then((response: any) => {
-        console.log(response);
         setIsLoading(false);
         localStorage.setItem("userTkn", response.data.token);
         toast.success("Login success", {

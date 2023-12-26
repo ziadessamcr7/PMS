@@ -74,7 +74,6 @@ const ModalComponent = ({ handleClose, show, getTasks, clearInputFields }) => {
         },
       })
       .then((response) => {
-        console.log(response);
         getTasks();
       })
       .catch((err) => {

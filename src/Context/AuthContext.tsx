@@ -16,7 +16,6 @@ export default function AuthContextProvider(props: IAuthContextProviderProps) {
   const requestHeaders = {
     Authorization: `Bearer ${localStorage.getItem("userTkn")}`,
   };
-  console.log();
   function saveUserData() {
     const encodedData: any = localStorage.getItem("userTkn");
     const decodedData: any = jwtDecode(encodedData);
