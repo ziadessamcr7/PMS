@@ -7,7 +7,7 @@ import Modal from "react-bootstrap/Modal";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../Context/AuthContext";
 
-const ModalComponent = ({ handleClose, show, getTasks, clearInputFields }) => {
+const ModalComponent = ({ handleClose, show, getTasks }) => {
   const { requestHeaders, baseUrl } = useContext(AuthContext);
 
   const [usersList, setUsersList] = useState([]);
@@ -15,19 +15,12 @@ const ModalComponent = ({ handleClose, show, getTasks, clearInputFields }) => {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  clearInputFields(setValue);
-
   const getUserList = () => {
     setIsLoading(true);
     axios
-      .get(
-        `http://upskilling-egypt.com:3003/api/v1/Users/?pageSize=10&pageNumber=1`,
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("userTkn")}`,
-          },
-        }
-      )
+      .get(`${baseUrl}/Users/?pageSize=10&pageNumber=1`, {
+        headers: requestHeaders,
+      })
       .then((response: any) => {
         setUsersList(
           response?.data?.data.filter((element) => {

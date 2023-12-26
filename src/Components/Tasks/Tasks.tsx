@@ -3,11 +3,22 @@
 import { useContext, useEffect, useState } from "react";
 import { Container, Row } from "react-bootstrap";
 
-import HeaderComponent from "./HeaderComponent";
-import TableComponent from "./TableComponent";
 import axios from "axios";
+import Pagination from "react-bootstrap/Pagination";
 import { AuthContext } from "../../Context/AuthContext";
+import HeaderComponent from "./HeaderComponent";
+import ModalComponent from "./ModalComponent";
+import TableComponent from "./TableComponent";
 
+let active = 1;
+let items = [];
+for (let number = 1; number <= 5; number++) {
+  items.push(
+    <Pagination.Item key={number} active={number === active}>
+      {number}
+    </Pagination.Item>
+  );
+}
 export default function Tasks() {
   const [pageName, setPageName] = useState();
   const [tasksList, setTasksList] = useState([]);
@@ -18,7 +29,16 @@ export default function Tasks() {
   const handleClose = () => setShow("Closed");
 
   const { requestHeaders, BaseUrl, userRoll } = useContext(AuthContext);
-  console.log(userRoll);
+
+  let active = 2;
+  let items = [];
+  for (let number = 1; number <= 5; number++) {
+    items.push(
+      <Pagination.Item key={number} active={number === active}>
+        {number}
+      </Pagination.Item>
+    );
+  }
   {
     /* location  */
   }
@@ -49,25 +69,29 @@ export default function Tasks() {
         params: { pageSize: 5, pageNumber: pageNo },
       })
       .then((response: any) => {
-        // setTasksList(response.data.data);
-        // setIsLoading(false);
+        setTasksList(response.data.data);
+        setIsLoading(false);
         // setPageCount(response.data.totalNumberOfPages);
         // setPagePagination(pageNo);
-        // console.log(response.data.data);
+        console.log(response.data.data);
       })
       .catch((err) => {
         console.log(err);
       });
   };
   useEffect(() => {
-    // getTasks(pagePagination);
-    getTasks(2);
+    getTasks(1);
   }, []);
   // const handleChangePagination = (event, page) => {
   //   getTasks(page);
   // };
   return (
     <>
+      <ModalComponent
+        handleClose={handleClose}
+        show={show}
+        getTasks={getTasks}
+      />
       <Container fluid>
         <HeaderComponent
           showAddModal={showAddModal}
@@ -79,6 +103,11 @@ export default function Tasks() {
           <Row className="mt-3">Search</Row>
           <Row>
             <TableComponent tasksList={tasksList} />
+          </Row>
+          <Row>
+            <Pagination bg={"success"} size="sm">
+              {items}
+            </Pagination>
           </Row>
         </Container>
       </section>
