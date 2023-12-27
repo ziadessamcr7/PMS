@@ -10,15 +10,6 @@ import HeaderComponent from "./HeaderComponent";
 import ModalComponent from "./ModalComponent";
 import TableComponent from "./TableComponent";
 
-let active = 1;
-let items = [];
-for (let number = 1; number <= 5; number++) {
-  items.push(
-    <Pagination.Item key={number} active={number === active}>
-      {number}
-    </Pagination.Item>
-  );
-}
 export default function Tasks() {
   const [pageName, setPageName] = useState();
   const [tasksList, setTasksList] = useState([]);
@@ -30,15 +21,6 @@ export default function Tasks() {
 
   const { requestHeaders, BaseUrl, userRoll } = useContext(AuthContext);
 
-  let active = 2;
-  let items = [];
-  for (let number = 1; number <= 5; number++) {
-    items.push(
-      <Pagination.Item key={number} active={number === active}>
-        {number}
-      </Pagination.Item>
-    );
-  }
   {
     /* location  */
   }
@@ -64,27 +46,38 @@ export default function Tasks() {
   const getTasks = (pageNo) => {
     setIsLoading(true);
     axios
-      .get(`${BaseUrl}/Task/${userRoll === "Manager" ? "Manager" : ""}?`, {
+      .get(`${BaseUrl}/Task/${userRoll === "Manager" ? "Manager" : ""}`, {
         headers: requestHeaders,
         params: { pageSize: 5, pageNumber: pageNo },
       })
-      .then((response: any) => {
+      .then((response) => {
         setTasksList(response.data.data);
         setIsLoading(false);
-        // setPageCount(response.data.totalNumberOfPages);
-        // setPagePagination(pageNo);
-        console.log(response.data.data);
+        setPageCount(response.data.totalNumberOfPages);
+        setPagePagination(pageNo);
       })
       .catch((err) => {
         console.log(err);
       });
   };
   useEffect(() => {
-    getTasks(1);
-  }, []);
-  // const handleChangePagination = (event, page) => {
-  //   getTasks(page);
-  // };
+    getTasks(pagePagination);
+  }, [pagePagination]);
+  const handleChangePagination = (page: number) => {
+    getTasks(page);
+  };
+  const paginationItems = [];
+  for (let number = 1; number <= pageCount; number++) {
+    paginationItems.push(
+      <Pagination.Item
+        key={number}
+        active={number === pagePagination}
+        onClick={() => handleChangePagination(number)}
+      >
+        {number}
+      </Pagination.Item>
+    );
+  }
   return (
     <>
       <ModalComponent
@@ -105,9 +98,7 @@ export default function Tasks() {
             <TableComponent tasksList={tasksList} />
           </Row>
           <Row>
-            <Pagination bg={"success"} size="sm">
-              {items}
-            </Pagination>
+            <Pagination size="sm">{paginationItems}</Pagination>
           </Row>
         </Container>
       </section>
