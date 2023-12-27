@@ -1,18 +1,13 @@
 /** @format */
 
 import React, { useState } from "react";
-import { Table, Dropdown } from "react-bootstrap";
+import { ButtonGroup, Table } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import Dropdown from "react-bootstrap/Dropdown";
+import DropdownButton from "react-bootstrap/DropdownButton";
+import SplitButton from "react-bootstrap/SplitButton";
 
-const TableComponent = ({ tasksList, pageCount, pagePagination, getTasks }) => {
-  const [id, setId] = useState(0);
-
-  const [show, setShow] = useState(false);
-
-  const handleShow: (id: number) => void = (id) => {
-    setShow(true);
-    setId(id);
-  };
+const TableComponent = ({ tasksList, showDelete, showView, showEdit }) => {
   return (
     <>
       <Table striped hover responsive="sm">
@@ -36,8 +31,34 @@ const TableComponent = ({ tasksList, pageCount, pagePagination, getTasks }) => {
               <td>{row.project.title}</td>
               <td>{row.creationDate}</td>
               <td>
+                <DropdownButton
+                  as={ButtonGroup}
+                  id={`dropdown-button-drop-end`}
+                  drop={"start"}
+                  variant=""
+                  title={` `}
+                >
+                  <Dropdown.Item eventKey="1" onClick={() => showView(row.id)}>
+                    <i className="fa-regular fa-eye text-success"></i>
+                    <span className="text-capitalize mx-2">View</span>
+                  </Dropdown.Item>
+                  <Dropdown.Item onClick={() => showEdit(row.id)}>
+                    <i className="fas fa-edit text-success" />
+                    <span className="text-capitalize mx-2">edit</span>
+                  </Dropdown.Item>
+                  <Dropdown.Item onClick={() => showDelete(row.id)}>
+                    <i
+                      className="fa fa-trash text-success"
+                      aria-hidden="true"
+                    />
+                    <span className="text-capitalize mx-2">Delete</span>
+                  </Dropdown.Item>
+                  {/* <Dropdown.Divider /> */}
+                </DropdownButton>
+              </td>
+              {/* <td>
                 <Dropdown>
-                  <Dropdown.Toggle variant=""></Dropdown.Toggle>
+                  <Dropdown.Toggle drop="start" variant=""></Dropdown.Toggle>
                   <Dropdown.Menu>
                     <Dropdown.Item onClick={() => handleShow(row.id)}>
                       <i className="fa-solid fa-pen-fancy"></i> Block
@@ -51,7 +72,7 @@ const TableComponent = ({ tasksList, pageCount, pagePagination, getTasks }) => {
                     </Link>
                   </Dropdown.Menu>
                 </Dropdown>
-              </td>
+              </td> */}
             </tr>
           ))}
 

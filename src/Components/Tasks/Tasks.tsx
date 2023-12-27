@@ -4,12 +4,15 @@ import { useContext, useEffect, useState } from "react";
 import { Container, Row } from "react-bootstrap";
 
 import axios from "axios";
-import Pagination from "react-bootstrap/Pagination";
+import Modal from "react-bootstrap/Modal";
 import { AuthContext } from "../../Context/AuthContext";
+import DeleteModal from "../../Shared/DeleteModal/DeleteModal";
+import PagePaginationComponent from "../../Shared/PagePagination/PagePaginationComponent";
 import HeaderComponent from "./HeaderComponent";
 import ModalComponent from "./ModalComponent";
 import TableComponent from "./TableComponent";
-import PagePaginationComponent from "../../Shared/PagePagination/PagePaginationComponent";
+import EditModal from "../../Shared/EditModal/EditModal";
+import ViewModal from "../../Shared/ViewModal/ViewModal";
 
 export default function Tasks() {
   const [pageName, setPageName] = useState();
@@ -17,6 +20,8 @@ export default function Tasks() {
   const [isLoading, setIsLoading] = useState(false);
   const [pageCount, setPageCount] = useState(1);
   const [pagePagination, setPagePagination] = useState(1);
+  const [itemId, setItemId] = useState(0);
+
   const [show, setShow] = useState("Closed");
   const handleClose = () => setShow("Closed");
 
@@ -40,7 +45,21 @@ export default function Tasks() {
   const showAddModal = () => {
     setShow("modal-add");
   };
-  const getTasks = (pageNo) => {
+  const showDelete = (id: number) => {
+    setItemId(id);
+    setShow("modal-Delete");
+  };
+  const showView = (id: number) => {
+    setItemId(id);
+
+    setShow("modal-view");
+  };
+  const showEdit = (id: number) => {
+    setItemId(id);
+
+    setShow("modal-edit");
+  };
+  const getTasks = (pageNo: number) => {
     setIsLoading(true);
     axios
       .get(`${BaseUrl}/Task/${userRoll === "Manager" ? "Manager" : ""}`, {
@@ -57,12 +76,33 @@ export default function Tasks() {
         console.log(err);
       });
   };
+  {
+    /*Delete */
+  }
+  const handleDelete = () => {
+    alert(itemId);
+    console.log("delete");
+  };
+  {
+    /*view */
+  }
+  {
+    /*Edit */
+  }
+
   useEffect(() => {
     getTasks(pagePagination);
   }, [pagePagination]);
 
   return (
     <>
+      <DeleteModal
+        show={show}
+        handleClose={handleClose}
+        handleDelete={handleDelete}
+      />
+      <EditModal show={show} handleClose={handleClose} />
+      <ViewModal show={show} handleClose={handleClose} />
       <ModalComponent
         handleClose={handleClose}
         show={show}
@@ -80,9 +120,9 @@ export default function Tasks() {
           <Row>
             <TableComponent
               tasksList={tasksList}
-              pageCount={pageCount}
-              pagePagination={pagePagination}
-              getTasks={getTasks}
+              showDelete={showDelete}
+              showView={showView}
+              showEdit={showEdit}
             />
           </Row>
           <Row>
