@@ -9,6 +9,7 @@ import { AuthContext } from "../../Context/AuthContext";
 import HeaderComponent from "./HeaderComponent";
 import ModalComponent from "./ModalComponent";
 import TableComponent from "./TableComponent";
+import PagePaginationComponent from "../../Shared/PagePagination/PagePaginationComponent";
 
 export default function Tasks() {
   const [pageName, setPageName] = useState();
@@ -20,10 +21,6 @@ export default function Tasks() {
   const handleClose = () => setShow("Closed");
 
   const { requestHeaders, BaseUrl, userRoll } = useContext(AuthContext);
-
-  {
-    /* location  */
-  }
 
   {
     /*select */
@@ -63,21 +60,7 @@ export default function Tasks() {
   useEffect(() => {
     getTasks(pagePagination);
   }, [pagePagination]);
-  const handleChangePagination = (page: number) => {
-    getTasks(page);
-  };
-  const paginationItems = [];
-  for (let number = 1; number <= pageCount; number++) {
-    paginationItems.push(
-      <Pagination.Item
-        key={number}
-        active={number === pagePagination}
-        onClick={() => handleChangePagination(number)}
-      >
-        {number}
-      </Pagination.Item>
-    );
-  }
+
   return (
     <>
       <ModalComponent
@@ -95,10 +78,19 @@ export default function Tasks() {
         <Container style={{ height: "65vh" }}>
           <Row className="mt-3">Search</Row>
           <Row>
-            <TableComponent tasksList={tasksList} />
+            <TableComponent
+              tasksList={tasksList}
+              pageCount={pageCount}
+              pagePagination={pagePagination}
+              getTasks={getTasks}
+            />
           </Row>
           <Row>
-            <Pagination size="sm">{paginationItems}</Pagination>
+            <PagePaginationComponent
+              pageCount={pageCount}
+              pagePagination={pagePagination}
+              getTasks={getTasks}
+            />
           </Row>
         </Container>
       </section>
