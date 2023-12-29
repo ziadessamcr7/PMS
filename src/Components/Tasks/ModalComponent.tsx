@@ -18,19 +18,24 @@ const ModalComponent = ({ handleClose, show, getTasks }) => {
   const getUserList = () => {
     setIsLoading(true);
     axios
-      .get(`${baseUrl}/Users/?pageSize=5&pageNumber=1`, {
-        headers: requestHeaders,
-      })
+      .get(
+        `http://upskilling-egypt.com:3003/api/v1/Users/?pageSize=10&pageNumber=1`,
+        {
+          headers: requestHeaders,
+        }
+      )
       .then((response: any) => {
+        console.log(response);
+
         setUsersList(
-          response?.data?.data.filter((element) => {
+          response?.data?.data.filter((element: any) => {
             return element !== undefined;
           })
         );
       })
-      .catch((err: any) => {
+      .catch((error: any) => {
         setIsLoading(false);
-        // toast.error(err.response.data.message);
+        toast.error(err.response.data.message);
       });
   };
   const getProjectList = () => {

@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { AuthContext } from "../../Context/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../../../src/assets/images/PMS 3.png";
-import Loading from "../Loading/Loading";
+import Loading from "../../Shared/LoadingSpinner/LoadingSpinner";
 import axios from "axios";
 import { toast } from "react-toastify";
 

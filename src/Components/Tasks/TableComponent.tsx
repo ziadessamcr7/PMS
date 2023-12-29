@@ -38,11 +38,11 @@ const TableComponent = ({ tasksList, showDelete, showView, showEdit }) => {
                   variant=""
                   title={` `}
                 >
-                  <Dropdown.Item eventKey="1" onClick={() => showView(row.id)}>
+                  {/* <Dropdown.Item eventKey="1" onClick={() => showView(row.id)}>
                     <i className="fa-regular fa-eye text-success"></i>
                     <span className="text-capitalize mx-2">View</span>
-                  </Dropdown.Item>
-                  <Dropdown.Item onClick={() => showEdit(row.id)}>
+                  </Dropdown.Item> */}
+                  <Dropdown.Item onClick={() => showEdit(row)}>
                     <i className="fas fa-edit text-success" />
                     <span className="text-capitalize mx-2">edit</span>
                   </Dropdown.Item>

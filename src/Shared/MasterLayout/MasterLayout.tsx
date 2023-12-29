@@ -21,7 +21,7 @@ export default function MasterLayout() {
         </div>
         <div className="w-100">
           <div className=""></div>
-          <div className="content-container">
+          <div className="content-container ">
             <Outlet />
           </div>
         </div>

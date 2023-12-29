@@ -6,7 +6,7 @@ import { Form, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import logo from "../../assets/images/PMS 3.png";
-import Loading from "../Loading/Loading";
+import Loading from "../../Shared/LoadingSpinner/LoadingSpinner";
 import axios from "axios";
 import DynamicInputs from "../../Shared/PasswordInput/DynamicInputs";
 
