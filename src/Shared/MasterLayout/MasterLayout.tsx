@@ -19,9 +19,9 @@ export default function MasterLayout() {
         >
           <SideBar />
         </div>
-        <div className="mx-3">
+        <div className="mx-3 w-100">
           <div className=""></div>
-          <div className="content-container bg-warning">
+          <div className="content-container">
             <Outlet />
           </div>
         </div>
