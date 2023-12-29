@@ -18,7 +18,7 @@ const ModalComponent = ({ handleClose, show, getTasks }) => {
   const getUserList = () => {
     setIsLoading(true);
     axios
-      .get(`${baseUrl}/Users/?pageSize=10&pageNumber=1`, {
+      .get(`${baseUrl}/Users/?pageSize=5&pageNumber=1`, {
         headers: requestHeaders,
       })
       .then((response: any) => {

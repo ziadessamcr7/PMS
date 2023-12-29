@@ -23,7 +23,6 @@ const DeleteModal = ({ show, handleClose, handleDelete }) => {
       </Modal.Header>
       <Form onSubmit={handleSubmit(handleDelete)}>
         <Modal.Body>
-          {" "}
           <div className="text-center">
             <img src={noData} alt="Delete Category" />
             <p className="fs-2 fw-bold">Delete This Task</p>
@@ -34,7 +33,7 @@ const DeleteModal = ({ show, handleClose, handleDelete }) => {
           </div>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="outline-danger" type="submit" onClick={handleDelete}>
+          <Button variant="outline-danger" onClick={handleDelete}>
             Delete This Item
           </Button>
         </Modal.Footer>

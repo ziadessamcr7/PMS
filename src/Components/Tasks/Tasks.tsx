@@ -68,6 +68,7 @@ export default function Tasks() {
       })
       .then((response) => {
         setTasksList(response.data.data);
+        console.log(response);
         setIsLoading(false);
         setPageCount(response.data.totalNumberOfPages);
         setPagePagination(pageNo);
@@ -80,8 +81,15 @@ export default function Tasks() {
     /*Delete */
   }
   const handleDelete = () => {
-    alert(itemId);
-    console.log("delete");
+    axios
+      .delete(`http://upskilling-egypt.com:3003/api/v1/Task/${itemId}`, {
+        headers: requestHeaders,
+      })
+      .then((response) => {
+        getTasks();
+        handleClose();
+      })
+      .catch((error) => console.log(error));
   };
   {
     /*view */
