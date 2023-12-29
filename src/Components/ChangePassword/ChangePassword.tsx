@@ -11,7 +11,7 @@ import { AuthContext } from "../../Context/AuthContext.tsx";
 
 
 export default function ChangePassword() {
-  let { url, headers }: any = useContext(AuthContext);
+  let { BaseUrl, requestHeaders }: any = useContext(AuthContext);
 
 
   let {
@@ -22,20 +22,21 @@ export default function ChangePassword() {
   }: any = useForm();
   const [isLoading, setisLoading] = useState(false);
   const navigate = useNavigate();
-  const password = useRef({});
-  password.current = watch("newPassword", "");
+  let password = useRef({});
+  password = watch("newPassword");
 
   //api intgration
   function formSubmit(data: object) {
     setisLoading(true);
-    axios.put(`${url}Users/ChangePassword`, data, headers)
+    axios.put(`${BaseUrl}/Users/ChangePassword`, data, {
+      headers: requestHeaders
+    })
       .then((result) =>
       //toast && navigate
 
       {
         setisLoading(false);
-        toast(result.data.message);
-        navigate("/login");
+        toast.success(result.data.message);
       }
       )
       .catch((error) =>
@@ -43,6 +44,7 @@ export default function ChangePassword() {
       {
         // toast("Invalid password")
         console.log(error);
+        toast.error(error.response.data.message)
 
         setisLoading(false);
       }
@@ -131,8 +133,9 @@ export default function ChangePassword() {
         {errors.confirmNewPassword && <span className='text-danger'>{errors.confirmNewPassword.message}</span>}
 
 
-        <button className='btn btn-success w-100 fw-bold  mt-4'>
-          Change Password
+        <button className='btn btn-warning text-white w-100 fw-bold  mt-4'>
+          {isLoading ? <i className="fa-solid fa-spin fa-spinner"></i> : 'Change Password'}
+
         </button>
       </form>
 
