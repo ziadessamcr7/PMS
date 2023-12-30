@@ -1,10 +1,11 @@
 /** @format */
 
 import { useContext, useEffect, useState } from "react";
-import { Container, Row } from "react-bootstrap";
+import { Container, Row, InputGroup } from "react-bootstrap";
+import { Button, Col, FloatingLabel, Form } from "react-bootstrap";
+import Modal from "react-bootstrap/Modal";
 
 import axios from "axios";
-import Modal from "react-bootstrap/Modal";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../Context/AuthContext";
 import DeleteModal from "../../Shared/DeleteModal/DeleteModal";
@@ -16,7 +17,6 @@ import HeaderComponent from "./HeaderComponent";
 import ModalComponent from "./ModalComponent";
 import TableComponent from "./TableComponent";
 
-import { Button, Col, FloatingLabel, Form } from "react-bootstrap";
 import { toast } from "react-toastify";
 
 export default function Tasks() {
@@ -297,6 +297,7 @@ export default function Tasks() {
         </Modal>
       </div>
       <ViewModal show={show} handleClose={handleClose} itemId={itemId} />
+
       <ModalComponent
         getUserList={getUserList}
         getProjectList={getProjectList}
@@ -314,8 +315,18 @@ export default function Tasks() {
       </Container>
       <section className="bg-light tables ">
         <Container style={{ height: "65vh" }}>
-          <Row className="mt-3">Search</Row>
-
+          <Row className="search-recipes d-flex align-items-center bg-light my-4 rounded-3">
+            <Col md={4}>
+              <InputGroup className="mb-3 ">
+                <Form.Control
+                  placeholder="search "
+                  aria-label="Username"
+                  aria-describedby="basic-addon1"
+                  className="rounded-pill"
+                />
+              </InputGroup>
+            </Col>
+          </Row>
           {!isLoading ? (
             tasksList.length >= 0 ? (
               <>
