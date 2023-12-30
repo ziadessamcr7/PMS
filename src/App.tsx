@@ -21,6 +21,7 @@ import { AuthContext } from "./Context/AuthContext";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ForgetPassword from "./Components/ForgetPassword/ForgetPassword";
+import AddProject from "./Components/AddProject/AddProject";
 
 function App() {
   let { userData }: any = useContext(AuthContext);
