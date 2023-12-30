@@ -6,62 +6,67 @@ import { Form, Row, Col, Button, FloatingLabel } from "react-bootstrap";
 import Modal from "react-bootstrap/Modal";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../Context/AuthContext";
+import { toast } from "react-toastify";
 
-const ModalComponent = ({ handleClose, show, getTasks }) => {
-  const { requestHeaders, baseUrl } = useContext(AuthContext);
+const ModalComponent = ({
+  handleClose,
+  show,
+  getTasks,
+  usersList,
+  projectsList,
+}) => {
+  // const { requestHeaders, baseUrl } = useContext(AuthContext);
 
-  const [usersList, setUsersList] = useState([]);
-  const [projectsList, setProjectsList] = useState([]);
+  // const [usersList, setUsersList] = useState([]);
+  // const [projectsList, setProjectsList] = useState([]);
 
-  const [isLoading, setIsLoading] = useState(false);
+  // const [isLoading, setIsLoading] = useState(false);
 
-  const getUserList = () => {
-    setIsLoading(true);
-    axios
-      .get(
-        `http://upskilling-egypt.com:3003/api/v1/Users/?pageSize=10&pageNumber=1`,
-        {
-          headers: requestHeaders,
-        }
-      )
-      .then((response: any) => {
-        console.log(response);
-
-        setUsersList(
-          response?.data?.data.filter((element: any) => {
-            return element !== undefined;
-          })
-        );
-      })
-      .catch((error: any) => {
-        setIsLoading(false);
-        toast.error(err.response.data.message);
-      });
-  };
-  const getProjectList = () => {
-    setIsLoading(true);
-    axios
-      .get(
-        `http://upskilling-egypt.com:3003/api/v1/Project/manager?pageSize=10&pageNumber=1 `,
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("userTkn")}`,
-          },
-        }
-      )
-      .then((response: any) => {
-        setProjectsList(response?.data?.data);
-      })
-      .catch((error: any) => {
-        setIsLoading(false);
-        console.log(error.response.data.message);
-        // toast.error(err.response.data.message);
-      });
-  };
+  // const getUserList = () => {
+  //   setIsLoading(true);
+  //   axios
+  //     .get(
+  //       `http://upskilling-egypt.com:3003/api/v1/Users/?pageSize=10&pageNumber=1`,
+  //       {
+  //         headers: requestHeaders,
+  //       }
+  //     )
+  //     .then((response: any) => {
+  //       setUsersList(
+  //         response?.data?.data.filter((element: any) => {
+  //           return element !== undefined;
+  //         })
+  //       );
+  //     })
+  //     .catch((error: any) => {
+  //       setIsLoading(false);
+  //       toast.error(error.response.data.message);
+  //     });
+  // };
+  // const getProjectList = () => {
+  //   setIsLoading(true);
+  //   axios
+  //     .get(
+  //       `http://upskilling-egypt.com:3003/api/v1/Project/manager?pageSize=10&pageNumber=1 `,
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer ${localStorage.getItem("userTkn")}`,
+  //         },
+  //       }
+  //     )
+  //     .then((response: any) => {
+  //       setProjectsList(response?.data?.data);
+  //     })
+  //     .catch((error: any) => {
+  //       setIsLoading(false);
+  //       console.log(error.response.data.message);
+  //       // toast.error(err.response.data.message);
+  //     });
+  // };
   const {
     register,
     handleSubmit,
-    setValue,
+    // setValue,
     formState: { errors },
   } = useForm();
   const addPostTasks = (data) => {
@@ -78,10 +83,7 @@ const ModalComponent = ({ handleClose, show, getTasks }) => {
         console.log(err);
       });
   };
-  useEffect(() => {
-    getUserList();
-    getProjectList();
-  }, []);
+
   return (
     <>
       <Modal

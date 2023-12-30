@@ -1,7 +1,7 @@
 /** @format */
 
 import React, { useState } from "react";
-import { ButtonGroup, Table } from "react-bootstrap";
+import { Button, ButtonGroup, Table } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
@@ -14,6 +14,8 @@ const TableComponent = ({ tasksList, showDelete, showView, showEdit }) => {
         <thead>
           <tr>
             <th>Title</th>
+            <th>Description</th>
+
             <th>Status</th>
             <th>User</th>
             <th>Project </th>
@@ -25,7 +27,17 @@ const TableComponent = ({ tasksList, showDelete, showView, showEdit }) => {
           {tasksList.map((row) => (
             <tr key={row.id}>
               <td>{row.title}</td>
-              <td>{row.status}</td>
+              <td>{row.description}</td>
+
+              <td>
+                <div
+                  className={`rounded-pill p-2 ${
+                    row.status !== "ToDo" ? "bg-success" : "bg-light"
+                  }  `}
+                >
+                  {row.status}
+                </div>
+              </td>
               <td>{row?.employee?.userName}</td>
 
               <td>{row.project.title}</td>

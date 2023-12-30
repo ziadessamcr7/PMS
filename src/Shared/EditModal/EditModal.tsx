@@ -1,13 +1,22 @@
 /** @format */
 
 import axios from "axios";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import { AuthContext } from "../../Context/AuthContext";
 import { Form, Row, Col, Button, FloatingLabel } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 
-const EditModal = ({ show, handleClose, itemId }) => {
+const EditModal = ({
+  show,
+  handleClose,
+  itemId,
+  showEdit,
+}: {
+  show: string;
+  handleClose: any;
+  itemId: number;
+}) => {
   const [isLoading, setIsLoading] = useState(false);
   const { requestHeaders } = useContext(AuthContext);
   const {
@@ -16,8 +25,6 @@ const EditModal = ({ show, handleClose, itemId }) => {
     setValue,
     formState: { errors },
   } = useForm();
-  console.log(itemId);
-
   const editTask = () => {
     setIsLoading(true);
     axios
@@ -31,6 +38,7 @@ const EditModal = ({ show, handleClose, itemId }) => {
         console.log(error);
       });
   };
+  useEffect(() => showEdit(setValue), []);
   return (
     <Modal
       show={show === "modal-edit"}
