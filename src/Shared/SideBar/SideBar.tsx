@@ -1,10 +1,11 @@
 /** @format */
 
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Sidebar, Menu, MenuItem } from "react-pro-sidebar";
 import { Modal } from "react-bootstrap";
 import ChangePassword from "../../Components/ChangePassword/ChangePassword";
+import { AuthContext } from "../../Context/AuthContext";
 
 export default function SideBar() {
   const [isCollapsed, setIsCollapsed] = useState(true);
@@ -20,6 +21,8 @@ export default function SideBar() {
 
   const nav = useNavigate();
 
+  const { userRole }: any = useContext(AuthContext)
+
   function logout() {
     if (localStorage.getItem("userTkn") !== null) {
       localStorage.removeItem("userTkn");
@@ -32,6 +35,8 @@ export default function SideBar() {
 
 
     <>
+      {console.log(userRole)
+      }
       <Modal show={show} onHide={handleClose}>
         <Modal.Body> <ChangePassword /> </Modal.Body>
       </Modal>
@@ -55,14 +60,15 @@ export default function SideBar() {
               {" "}
               Home
             </MenuItem>
-            <MenuItem
+            {userRole == 'Manager' ? <MenuItem
               title="users list"
               icon={<i className="fa fa-users"></i>}
               component={<Link to="/dashboard/users" />}
             >
-              {" "}
               Users
-            </MenuItem>
+
+            </MenuItem> : ''}
+
             <MenuItem
               title="recipes"
               icon={<i className="fa-solid fa-sheet-plastic"></i>}

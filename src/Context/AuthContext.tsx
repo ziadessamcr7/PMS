@@ -7,6 +7,7 @@ export default function AuthContextProvider(props: any) {
 
     const BaseUrl = `http://upskilling-egypt.com:3003/api/v1`
     const [userData, setUserData] = useState();
+    const [userRole, setUserRole] = useState();
     let requestHeaders = {
         Authorization: `Bearer ${localStorage.getItem('userTkn')}`
     }
@@ -15,6 +16,9 @@ export default function AuthContextProvider(props: any) {
         let encodedData: any = localStorage.getItem("userTkn");
         let decodedData: any = jwtDecode(encodedData);
         setUserData(decodedData);
+        setUserRole(decodedData.userGroup)
+        console.log(decodedData.userGroup);
+
     };
     useEffect(() => {
         if (localStorage.getItem("userTkn")) {
@@ -28,7 +32,8 @@ export default function AuthContextProvider(props: any) {
         BaseUrl,
         userData,
         saveUserData,
-        requestHeaders
+        requestHeaders,
+        userRole
     }}>
         {props.children}
     </AuthContext.Provider>
