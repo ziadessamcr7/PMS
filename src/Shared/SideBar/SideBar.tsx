@@ -11,7 +11,7 @@ export default function SideBar() {
 
   const [show, setShow] = useState(false);
 
-  const handleClose = () => setShow(false);    // to open and close modal
+  const handleClose = () => setShow(false); // to open and close modal
   const handleShow = () => setShow(true);
 
   const handleToggle = () => {
@@ -29,11 +29,12 @@ export default function SideBar() {
   }
 
   return (
-
-
     <>
       <Modal show={show} onHide={handleClose}>
-        <Modal.Body> <ChangePassword /> </Modal.Body>
+        <Modal.Body>
+          {" "}
+          <ChangePassword />{" "}
+        </Modal.Body>
       </Modal>
 
       <div className="side-bar">
@@ -52,7 +53,6 @@ export default function SideBar() {
               icon={<i className="fa fa-home"></i>}
               component={<Link to="/dashboard" />}
             >
-              {" "}
               Home
             </MenuItem>
             <MenuItem
@@ -60,18 +60,17 @@ export default function SideBar() {
               icon={<i className="fa fa-users"></i>}
               component={<Link to="/dashboard/users" />}
             >
-              {" "}
               Users
             </MenuItem>
             <MenuItem
-              title="recipes"
+              title="Projects"
               icon={<i className="fa-solid fa-sheet-plastic"></i>}
               component={<Link to="/dashboard/projects" />}
             >
               Projects
             </MenuItem>
             <MenuItem
-              title="categories"
+              title="Tasks"
               icon={<i className="fa-solid fa-list-check"></i>}
               component={<Link to="/dashboard/tasks" />}
             >
@@ -80,7 +79,8 @@ export default function SideBar() {
             <MenuItem
               title="change Password"
               icon={<i className="fa-solid fa-unlock"></i>}
-              onClick={handleShow} >
+              onClick={handleShow}
+            >
               Change Password
             </MenuItem>
             <MenuItem
@@ -93,9 +93,6 @@ export default function SideBar() {
           </Menu>
         </Sidebar>
       </div>
-
     </>
-
-
   );
 }
