@@ -6,7 +6,7 @@ import { Sidebar, Menu, MenuItem } from "react-pro-sidebar";
 import { Modal } from "react-bootstrap";
 import ChangePassword from "../../Components/ChangePassword/ChangePassword";
 
-export default function SideBar() {
+export default function SideBar(userRoll) {
   const [isCollapsed, setIsCollapsed] = useState(true);
 
   const [show, setShow] = useState(false);
@@ -32,8 +32,7 @@ export default function SideBar() {
     <>
       <Modal show={show} onHide={handleClose}>
         <Modal.Body>
-          {" "}
-          <ChangePassword />{" "}
+          <ChangePassword />
         </Modal.Body>
       </Modal>
 
@@ -74,7 +73,7 @@ export default function SideBar() {
               icon={<i className="fa-solid fa-list-check"></i>}
               component={<Link to="/dashboard/tasks" />}
             >
-              Tasks
+              {userRoll.userRoll === "Manager" ? "tests" : "ToDo Board"}
             </MenuItem>
             <MenuItem
               title="change Password"

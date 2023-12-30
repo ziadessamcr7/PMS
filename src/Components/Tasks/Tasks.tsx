@@ -18,6 +18,7 @@ import ModalComponent from "./ModalComponent";
 import TableComponent from "./TableComponent";
 
 import { toast } from "react-toastify";
+import TaskTodoBoard from "./TaskTodoBoard";
 
 export default function Tasks() {
   const [pageName, setPageName] = useState();
@@ -320,71 +321,76 @@ export default function Tasks() {
         <HeaderComponent
           showAddModal={showAddModal}
           pageBtn={"+ Add New Task"}
+          userRoll={userRoll}
         />
       </Container>
-      <section className="bg-light tables ">
-        <Container style={{ height: "65vh" }}>
-          <Row className="search-recipes d-flex align-items-center bg-light my-4 rounded-3">
-            <Col md={4}>
-              <div className="">
-                <InputGroup className="mb-3 my-3  ">
-                  <Form.Control
-                    placeholder="search "
-                    aria-label="Username"
-                    aria-describedby="basic-addon1"
-                    className="rounded-pill p-2"
-                    onChange={searchValue}
+      {userRoll === "Manager" ? (
+        <section className="bg-light tables ">
+          <Container style={{ height: "65vh" }}>
+            <Row className="search-recipes d-flex align-items-center bg-light my-4 rounded-3">
+              <Col md={4}>
+                <div className="">
+                  <InputGroup className="mb-3 my-3  ">
+                    <Form.Control
+                      placeholder="search "
+                      aria-label="Username"
+                      aria-describedby="basic-addon1"
+                      className="rounded-pill p-2"
+                      onChange={searchValue}
+                    />
+                  </InputGroup>
+                </div>
+              </Col>
+              <Col md={1}>
+                <div className="">
+                  <select
+                    onChange={FilterByRole}
+                    className="form-select ms-1 rounded-5 p-2 text-center"
+                  >
+                    <option value="2" selected>
+                      Filter
+                    </option>
+                    <option value="1">Manager</option>
+                    <option value="2">Employee</option>
+                  </select>
+                </div>
+              </Col>
+            </Row>
+            {!isLoading ? (
+              tasksList.length >= 0 ? (
+                <>
+                  <Row className="text-center ">
+                    <TableComponent
+                      tasksList={tasksList}
+                      showDelete={showDelete}
+                      showView={showView}
+                      showEdit={showEdit}
+                    />
+                    <PagePaginationComponent
+                      pageCount={pageCount}
+                      pagePagination={pagePagination}
+                      getTasks={getTasks}
+                    />
+                  </Row>
+                </>
+              ) : (
+                <div className="text-center ">
+                  <img
+                    src={noData}
+                    alt="nodata found to display tasks data"
+                    className=""
                   />
-                </InputGroup>
-              </div>
-            </Col>
-            <Col md={1}>
-              <div className="">
-                <select
-                  onChange={FilterByRole}
-                  className="form-select ms-1 rounded-5 p-2 text-center"
-                >
-                  <option value="2" selected>
-                    Filter
-                  </option>
-                  <option value="1">Manager</option>
-                  <option value="2">Employee</option>
-                </select>
-              </div>
-            </Col>
-          </Row>
-          {!isLoading ? (
-            tasksList.length >= 0 ? (
-              <>
-                <Row className="text-center ">
-                  <TableComponent
-                    tasksList={tasksList}
-                    showDelete={showDelete}
-                    showView={showView}
-                    showEdit={showEdit}
-                  />
-                  <PagePaginationComponent
-                    pageCount={pageCount}
-                    pagePagination={pagePagination}
-                    getTasks={getTasks}
-                  />
-                </Row>
-              </>
+                  <p className="text-muted fw-bold fs-4">No Data Found</p>
+                </div>
+              )
             ) : (
-              <div className="text-center ">
-                <img
-                  src={noData}
-                  alt="nodata found to display tasks data"
-                  className=""
-                />
-                <p className="text-muted fw-bold fs-4">No Data Found</p>
-              </div>
-            )
-          ) : (
-            <LoadingSpinnerTables />
-          )}
-        </Container>
-      </section>
+              <LoadingSpinnerTables />
+            )}
+          </Container>
+        </section>
+      ) : (
+        <TaskTodoBoard />
+      )}
     </>
   );
 }

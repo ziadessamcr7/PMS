@@ -1,11 +1,13 @@
 /** @format */
 
-import React from "react";
+import React, { useContext } from "react";
 import SideBar from "../SideBar/SideBar";
 import NavBar from "../Navbar/NavBar";
 import { Outlet } from "react-router-dom";
+import { AuthContext } from "../../Context/AuthContext";
 
 export default function MasterLayout() {
+  const { userRoll } = useContext(AuthContext);
   return (
     <>
       <NavBar />
@@ -17,7 +19,7 @@ export default function MasterLayout() {
             borderRadius: "0rem 2.625rem 0rem 0rem",
           }}
         >
-          <SideBar />
+          <SideBar userRoll={userRoll} />
         </div>
         <div className=" w-100">
           <div className=""></div>

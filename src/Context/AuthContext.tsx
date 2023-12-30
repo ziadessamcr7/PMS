@@ -30,6 +30,7 @@ export default function AuthContextProvider(props: IAuthContextProviderProps) {
     setUserData(decodedData);
     setUserRoll(decodedData?.userGroup);
   }, []);
+  console.log(userRoll);
 
   useEffect(() => {
     if (localStorage.getItem("userTkn")) {
