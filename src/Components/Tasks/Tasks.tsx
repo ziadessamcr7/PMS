@@ -26,7 +26,7 @@ export default function Tasks() {
   const [pageCount, setPageCount] = useState(1);
   const [pagePagination, setPagePagination] = useState(1);
   const [itemId, setItemId] = useState(0);
-
+  const [searchData, setSearchData] = useState();
   const [show, setShow] = useState("Closed");
   const handleClose = () => setShow("Closed");
   const [usersList, setUsersList] = useState([]);
@@ -173,6 +173,16 @@ export default function Tasks() {
     getUserList();
     getProjectList();
   }, [pagePagination]);
+  {
+    /*search */
+  }
+  const searchValue = (e: any) => {
+    setSearchData(e.target.value);
+    // getTasks(searchData)
+  };
+  const FilterByRole = (e: any) => {
+    console.log(e.target.value);
+  };
 
   return (
     <>
@@ -196,7 +206,6 @@ export default function Tasks() {
           <Form onSubmit={handleSubmit(editTask)}>
             <Modal.Body>
               <Row className="g-2 flex-colum">
-                <h3></h3>
                 <Col md={12}>
                   <Form.Label htmlFor="inputTitle" className="text-capitalize ">
                     title
@@ -317,14 +326,31 @@ export default function Tasks() {
         <Container style={{ height: "65vh" }}>
           <Row className="search-recipes d-flex align-items-center bg-light my-4 rounded-3">
             <Col md={4}>
-              <InputGroup className="mb-3 ">
-                <Form.Control
-                  placeholder="search "
-                  aria-label="Username"
-                  aria-describedby="basic-addon1"
-                  className="rounded-pill"
-                />
-              </InputGroup>
+              <div className="">
+                <InputGroup className="mb-3 my-3  ">
+                  <Form.Control
+                    placeholder="search "
+                    aria-label="Username"
+                    aria-describedby="basic-addon1"
+                    className="rounded-pill p-2"
+                    onChange={searchValue}
+                  />
+                </InputGroup>
+              </div>
+            </Col>
+            <Col md={1}>
+              <div className="">
+                <select
+                  onChange={FilterByRole}
+                  className="form-select ms-1 rounded-5 p-2 text-center"
+                >
+                  <option value="2" selected>
+                    Filter
+                  </option>
+                  <option value="1">Manager</option>
+                  <option value="2">Employee</option>
+                </select>
+              </div>
             </Col>
           </Row>
           {!isLoading ? (
