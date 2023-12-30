@@ -5,7 +5,7 @@ import logo from "../../../src/assets/images/PMS 3.png";
 import { AuthContext } from "../../Context/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import Loading from "../Loading/Loading";
+import Loading from "../../Shared/LoadingSpinner/LoadingSpinner";
 import axios from "axios";
 import { toast } from "react-toastify";
 
@@ -30,7 +30,6 @@ export default function Login() {
     axios
       .post(`${BaseUrl}/Users/Login`, data)
       .then((response: any) => {
-        console.log(response);
         setIsLoading(false);
         localStorage.setItem("userTkn", response.data.token);
         toast.success("Login success", {

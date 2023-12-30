@@ -1,0 +1,60 @@
+/** @format */
+
+.dotCollision {
+  position: relative;
+  width: 10px;
+  height: 10px;
+
+  border-radius: 5px;
+  background-color: #047c20;
+  color: #9880ff;
+}
+.dotCollision::before,
+.dotCollision::after {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  top: 0;
+}
+.dotCollision::before {
+  left: -10px;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background-color: #80ff9e;
+  color: #9880ff;
+  animation: dotCollision-before 2s infinite ease-in;
+}
+.dotCollision::after {
+  left: 10px;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background-color: #80ff9e;
+  color: #9880ff;
+  animation: dotCollision-after 2s infinite ease-in;
+  animation-delay: 1s;
+}
+
+@keyframes dotCollision-before {
+  0%,
+  50%,
+  75%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-15px);
+  }
+}
+@keyframes dotCollision-after {
+  0%,
+  50%,
+  75%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(15px);
+  }
+}

@@ -21,11 +21,9 @@ import { AuthContext } from "./Context/AuthContext";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ForgetPassword from "./Components/ForgetPassword/ForgetPassword";
-import AddProject from "./Components/AddProject/AddProject";
 
 function App() {
-  let { userData, saveUserData }: any = useContext(AuthContext);
-
+  let { userData }: any = useContext(AuthContext);
   const routes = createBrowserRouter([
     {
       path: "/",
@@ -54,8 +52,7 @@ function App() {
         { path: "projects", element: <Projects /> },
         { path: "users", element: <Users /> },
         { path: "tasks", element: <Tasks /> },
-        { path: 'add-project', element: <AddProject /> },
-
+        { path: "add-project", element: <AddProject /> },
       ],
     },
   ]);
