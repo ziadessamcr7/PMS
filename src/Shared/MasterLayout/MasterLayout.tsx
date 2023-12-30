@@ -19,10 +19,15 @@ export default function MasterLayout() {
         >
           <SideBar />
         </div>
-        <div className="mx-3 w-100">
+        <div className=" w-100">
           <div className=""></div>
           <div className="content-container">
-            <Outlet />
+            <div className="mx-3 w-100">
+              <div className=""></div>
+              <div className="content-container ">
+                <Outlet />
+              </div>
+            </div>
           </div>
         </div>
       </div>
