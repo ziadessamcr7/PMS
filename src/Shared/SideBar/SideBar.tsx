@@ -7,7 +7,7 @@ import { Modal } from "react-bootstrap";
 import ChangePassword from "../../Components/ChangePassword/ChangePassword";
 import { AuthContext } from "../../Context/AuthContext";
 
-export default function SideBar(userRoll) {
+export default function SideBar() {
   const [isCollapsed, setIsCollapsed] = useState(true);
 
   const [show, setShow] = useState(false);
@@ -80,7 +80,7 @@ export default function SideBar(userRoll) {
               icon={<i className="fa-solid fa-list-check"></i>}
               component={<Link to="/dashboard/tasks" />}
             >
-              {userRoll.userRoll === "Manager" ? "tests" : "ToDo Board"}
+              Tasks
             </MenuItem>
             <MenuItem
               title="change Password"

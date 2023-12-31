@@ -1,17 +1,7 @@
-/** @format */
-
 import { jwtDecode } from "jwt-decode";
-import {
-  createContext,
-  useEffect,
-  useState,
-  useCallback,
-  useMemo,
-} from "react";
-import {
-  IAuthContextValue,
-  IAuthContextProviderProps,
-} from "../interface/authInterFace";
+import { createContext, useEffect, useState } from "react";
+
+export const AuthContext: any = createContext(null);
 
 export default function AuthContextProvider(props: any) {
 
