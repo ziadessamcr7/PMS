@@ -32,13 +32,13 @@ export default function SideBar() {
   }
 
   return (
-
-
     <>
       {console.log(userRole)
       }
       <Modal show={show} onHide={handleClose}>
-        <Modal.Body> <ChangePassword /> </Modal.Body>
+        <Modal.Body>
+          <ChangePassword />
+        </Modal.Body>
       </Modal>
 
       <div className="side-bar">
@@ -70,23 +70,24 @@ export default function SideBar() {
             </MenuItem> : ''}
 
             <MenuItem
-              title="recipes"
+              title="Projects"
               icon={<i className="fa-solid fa-sheet-plastic"></i>}
               component={<Link to="/dashboard/projects" />}
             >
               Projects
             </MenuItem>
             <MenuItem
-              title="categories"
+              title="Tasks"
               icon={<i className="fa-solid fa-list-check"></i>}
               component={<Link to="/dashboard/tasks" />}
             >
-              Tasks
+              {userRole === "Manager" ? "tests" : "ToDo Board"}
             </MenuItem>
             <MenuItem
               title="change Password"
               icon={<i className="fa-solid fa-unlock"></i>}
-              onClick={handleShow} >
+              onClick={handleShow}
+            >
               Change Password
             </MenuItem>
             <MenuItem
@@ -99,9 +100,6 @@ export default function SideBar() {
           </Menu>
         </Sidebar>
       </div>
-
     </>
-
-
   );
 }

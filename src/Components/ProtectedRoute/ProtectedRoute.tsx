@@ -4,7 +4,6 @@ import { Navigate } from 'react-router-dom';
 
 
 export default function ProtectedRoute({ children }: any) {
-  let { userData }: any = useContext(AuthContext);
   // console.log(userData);
 
   if (localStorage.getItem('userTkn') !== null) {
