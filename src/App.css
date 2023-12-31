@@ -98,3 +98,15 @@ textarea {
   background-repeat: no-repeat;
   height: 300px;
 }
+
+.navbar {
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 11;
+}
+
+.bordr-lft {
+  border-left: solid 3px rgb(227 156 26);
+}
