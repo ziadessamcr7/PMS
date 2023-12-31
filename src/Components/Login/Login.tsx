@@ -36,6 +36,7 @@ export default function Login() {
           autoClose: 2000,
         });
         navigate("/dashboard");
+        saveUserData()
       })
       .catch((error) => {
         console.log(error);

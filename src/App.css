@@ -7,6 +7,7 @@
   background-position: center center;
   background-repeat: no-repeat;
 }
+
 #login {
   background-image: url("assets/images/bg3.png");
   height: 100vh;
@@ -64,21 +65,24 @@ textarea {
 .ps-sidebar-container .ps-menu-button:hover {
   background-color: rgba(207, 155, 10, 0.438) !important;
 }
+
 .MuiInputLabel-root {
   color: orange !important;
 }
+
 .css-l4u8b9-MuiInputBase-root-MuiInput-root {
   color: white !important;
 }
-.css-l4u8b9-MuiInputBase-root-MuiInput-root:hover:not(
-    .Mui-disabled,
-    .Mui-error
-  ):before {
+
+.css-l4u8b9-MuiInputBase-root-MuiInput-root:hover:not(.Mui-disabled,
+  .Mui-error):before {
   border-bottom: 1px solid rgb(177 169 16) !important;
 }
+
 .css-l4u8b9-MuiInputBase-root-MuiInput-root:before {
   border-bottom: 1px solid rgb(177 169 16) !important;
 }
+
 .css-wgai2y-MuiFormLabel-asterisk {
   display: none;
 }
@@ -88,4 +92,24 @@ textarea {
 } */
 .tables {
   width: 94vw;
+}
+
+.dashboard-head {
+  background-image: url('../src/assets/images/Rectangle.png');
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 300px;
+}
+
+.navbar {
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 11;
+}
+
+.bordr-lft {
+  border-left: solid 3px rgb(227 156 26);
 }
