@@ -95,7 +95,6 @@ export default function Projects() {
         headers: requestHeaders,
       })
       .then((response) => {
-        console.log(response);
         handleClose();
         getAllProjects(1);
         toast.success("project deleted successfully", {
