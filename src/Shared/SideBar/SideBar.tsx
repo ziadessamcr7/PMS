@@ -54,13 +54,18 @@ export default function SideBar(userRoll) {
             >
               Home
             </MenuItem>
-            <MenuItem
-              title="users list"
-              icon={<i className="fa fa-users"></i>}
-              component={<Link to="/dashboard/users" />}
-            >
-              Users
-            </MenuItem>
+            {userRoll === "Manager" ? (
+              <MenuItem
+                title="users list"
+                icon={<i className="fa fa-users"></i>}
+                component={<Link to="/dashboard/users" />}
+              >
+                Users
+              </MenuItem>
+            ) : (
+              ""
+            )}
+
             <MenuItem
               title="Projects"
               icon={<i className="fa-solid fa-sheet-plastic"></i>}
@@ -73,7 +78,7 @@ export default function SideBar(userRoll) {
               icon={<i className="fa-solid fa-list-check"></i>}
               component={<Link to="/dashboard/tasks" />}
             >
-              {userRoll.userRoll === "Manager" ? "tests" : "ToDo Board"}
+              {userRoll.userRoll === "Manager" ? "Task" : "ToDo Board"}
             </MenuItem>
             <MenuItem
               title="change Password"

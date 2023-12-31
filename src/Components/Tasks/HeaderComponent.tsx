@@ -18,7 +18,9 @@ const HeaderComponent = ({ showAddModal, pageBtn, userRoll }) => {
   return (
     <Row className="p-4">
       <Col>
-        <h2 className="text-capitalize">{pageName}</h2>
+        <h2 className="text-capitalize">
+          {userRoll === "Manager" ? pageName : pageName + " " + "Board"}
+        </h2>
       </Col>
       {userRoll === "Manager" ? (
         <Col className="text-end">

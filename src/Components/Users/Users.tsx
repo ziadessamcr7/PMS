@@ -1,6 +1,6 @@
 /** @format */
 
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import LoadingSpinner from "../../Shared/LoadingSpinner/LoadingSpinner";
 import { Dropdown, Table } from "react-bootstrap";
@@ -10,7 +10,9 @@ import Notfound from "../../Shared/NotFound/Notfound";
 import Paginate from "../../Shared/PagePagination/Paginate";
 import axios from "axios";
 import css from "./Users.module.css";
+import { AuthContext } from "../../Context/AuthContext";
 export default function Users() {
+  const { userRoll } = useContext(AuthContext);
   const [usersList, setUsersList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [id, setId] = useState(0);
@@ -52,7 +54,7 @@ export default function Users() {
   };
 
   useEffect(() => {
-    getUserList();
+    if (userRoll === "Manager") getUserList();
   }, []);
 
   function searchValue(e: any) {

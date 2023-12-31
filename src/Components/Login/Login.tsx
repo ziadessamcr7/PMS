@@ -32,6 +32,7 @@ export default function Login() {
       .then((response: any) => {
         setIsLoading(false);
         localStorage.setItem("userTkn", response.data.token);
+        saveUserData();
         toast.success("Login success", {
           autoClose: 2000,
         });

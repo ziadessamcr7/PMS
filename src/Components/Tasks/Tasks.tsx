@@ -78,12 +78,9 @@ export default function Tasks() {
   const getUserList = () => {
     setIsLoading(true);
     axios
-      .get(
-        `http://upskilling-egypt.com:3003/api/v1/Users/?pageSize=10&pageNumber=1`,
-        {
-          headers: requestHeaders,
-        }
-      )
+      .get(`http://upskilling-egypt.com:3003/api/v1/Users/?pageSize=100`, {
+        headers: requestHeaders,
+      })
       .then((response: any) => {
         setUsersList(
           response?.data?.data.filter((element: any) => {
@@ -116,10 +113,10 @@ export default function Tasks() {
         // toast.error(err.response.data.message);
       });
   };
-  const getTasks = (pageNo: number) => {
+  const getManagerTasks = (pageNo: number) => {
     setIsLoading(true);
     axios
-      .get(`${BaseUrl}/Task/${userRoll === "Manager" ? "Manager" : ""}`, {
+      .get(`${BaseUrl}/Task/manager`, {
         headers: requestHeaders,
         params: { pageSize: 5, pageNumber: pageNo },
       })
@@ -143,7 +140,7 @@ export default function Tasks() {
         headers: requestHeaders,
       })
       .then((response) => {
-        getTasks();
+        getManagerTasks();
         handleClose();
         getUserList();
       })
@@ -163,16 +160,29 @@ export default function Tasks() {
       })
       .then((response: any) => {
         // console.log(response);
-        getTasks();
+        getManagerTasks();
       })
       .catch((error) => {
         console.log(error);
       });
   };
+  {
+    /*Employee Tasks */
+  }
+  const getEmpTasks = () => {
+    axios
+      .get(`${BaseUrl}/Task/`, { headers: requestHeaders })
+      .then((response) => console.log(response))
+      .catch((error) => console.log(error));
+  };
   useEffect(() => {
-    getTasks(pagePagination);
-    getUserList();
-    getProjectList();
+    if (userRoll === "Manager") {
+      getManagerTasks(pagePagination);
+      getUserList();
+      getProjectList();
+    } else {
+      getEmpTasks();
+    }
   }, [pagePagination]);
   {
     /*search */
@@ -315,7 +325,7 @@ export default function Tasks() {
         projectsList={projectsList}
         handleClose={handleClose}
         show={show}
-        getTasks={getTasks}
+        getTasks={getManagerTasks}
       />
       <Container fluid>
         <HeaderComponent
@@ -369,7 +379,7 @@ export default function Tasks() {
                     <PagePaginationComponent
                       pageCount={pageCount}
                       pagePagination={pagePagination}
-                      getTasks={getTasks}
+                      getTasks={getManagerTasks}
                     />
                   </Row>
                 </>

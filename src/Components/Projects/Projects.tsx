@@ -117,7 +117,6 @@ export default function Projects() {
         headers: requestHeaders,
       })
       .then((response) => {
-        console.log(response);
         handleClose();
         getAllProjects(1);
         toast.success("updated successfully", {
@@ -304,7 +303,6 @@ export default function Projects() {
                               showUpdateModale(proj);
                             }}
                           >
-                            {" "}
                             <i className="fa fa-edit me-2"></i>update
                           </Dropdown.Item>
                         </Dropdown.Menu>
