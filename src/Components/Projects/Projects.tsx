@@ -64,7 +64,6 @@ export default function Projects() {
         },
       })
       .then((response) => {
-        console.log(response);
         setProjectList(response?.data.data);
         setLoading(false);
         settotalNumOfPages(response?.data.totalNumberOfPages);
@@ -130,7 +129,7 @@ export default function Projects() {
   const handlPageChange = (data: any) => {
     console.log(data.selected + 1);
     let currentPage = data.selected + 1;
-    getAllProjects(currentPage); // 3ashan ama ados 3ala ay page yfdal 3amel search
+    getAllProjects(currentPage);
   };
 
   useEffect(() => {

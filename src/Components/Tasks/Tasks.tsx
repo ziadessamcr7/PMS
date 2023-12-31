@@ -121,7 +121,6 @@ export default function Tasks() {
         params: { pageSize: 5, pageNumber: pageNo },
       })
       .then((response) => {
-        // console.log(response.data.data);
         setTasksList(response.data.data);
         setIsLoading(false);
         setPageCount(response.data.totalNumberOfPages);
@@ -171,7 +170,10 @@ export default function Tasks() {
   }
   const getEmpTasks = () => {
     axios
-      .get(`${BaseUrl}/Task/`, { headers: requestHeaders })
+      .get(
+        `http://upskilling-egypt.com:3003/api/v1/Task?pageSize=5&pageNumber=1`,
+        { headers: requestHeaders }
+      )
       .then((response) => console.log(response))
       .catch((error) => console.log(error));
   };
