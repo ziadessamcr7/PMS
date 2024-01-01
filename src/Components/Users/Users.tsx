@@ -1,15 +1,17 @@
 /** @format */
 
-import { useEffect, useState } from "react";
-import { toast } from "react-toastify";
-import LoadingSpinner from "../../Shared/LoadingSpinner/LoadingSpinner";
+import { useContext, useEffect, useState } from "react";
 import { Dropdown, Table } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import Notfound from "../../Shared/NotFound/Notfound";
-// import BlockModal from "./BlockModal/";
-import Paginate from "../../Shared/PagePagination/Paginate";
+import { AuthContext } from "../../Context/AuthContext";
 import axios from "axios";
 import css from "./Users.module.css";
+import { toast } from "react-toastify";
+// import NoData from "../../assets/images/nodata.png";
+import Loading from "../Loading/Loading";
+// import BlockModal from "../../assets/images/PMS3.png";
+import { Link } from "react-router-dom";
+import Paginate from "../../Shared/Pagination/Pagination";
+
 export default function Users() {
   const [usersList, setUsersList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -17,21 +19,24 @@ export default function Users() {
   const [srchValue, setSrchValue] = useState(null);
   const [filterRole, setFilterRole] = useState(null);
   const [show, setShow] = useState(false);
+  let { BaseUrl, requestHeaders }: any = useContext(AuthContext);
   const [toltalNumberOfPages, setToltalNumberOfPages] = useState(null);
   const handleShow: (id: number) => void = (id) => {
     setShow(true);
     setId(id);
   };
+
   const handleClose: () => void = () => setShow(false);
-  const getUserList = ({
+
+  function getUserList({
     userName,
     groups,
     pageSize = 5,
     pageNumber = 1,
-  }: any = []) => {
+  }: any = []) {
     setIsLoading(true);
     axios
-      .get(`http://upskilling-egypt.com:3003/api/v1/Users/`, {
+      .get(`${BaseUrl}Users/`, {
         headers: { Authorization: `Bearer ${localStorage.getItem("userTkn")}` },
         params: {
           pageSize,
@@ -49,7 +54,7 @@ export default function Users() {
         setIsLoading(false);
         toast.error(err.response.data.message);
       });
-  };
+  }
 
   useEffect(() => {
     getUserList();
@@ -98,11 +103,11 @@ export default function Users() {
             <div
               className={`text-center fs-1 text-success d-flex  justify-content-center align-items-center bg-light ${css.loadingHieght}`}
             >
-              <LoadingSpinner />
+              <Loading />
             </div>
           ) : usersList.length > 0 ? (
             <div className="table-responsive">
-              <Table striped hover style={{ height: "70vh" }}>
+              <Table striped hover>
                 <thead className="text-center">
                   <tr>
                     <th>User Name</th>
@@ -157,7 +162,8 @@ export default function Users() {
               </Table>
             </div>
           ) : (
-            <Notfound />
+            // <NoData />
+            ""
           )}
         </div>
       </div>
