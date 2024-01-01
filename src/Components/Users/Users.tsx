@@ -7,10 +7,10 @@ import axios from "axios";
 import css from "./Users.module.css";
 import { toast } from "react-toastify";
 // import NoData from "../../assets/images/nodata.png";
-import Loading from "../Loading/Loading";
 // import BlockModal from "../../assets/images/PMS3.png";
 import { Link } from "react-router-dom";
 import Paginate from "../../Shared/Pagination/Pagination";
+import { Hourglass } from "react-loader-spinner";
 
 export default function Users() {
   const [usersList, setUsersList] = useState([]);
@@ -36,7 +36,7 @@ export default function Users() {
   }: any = []) {
     setIsLoading(true);
     axios
-      .get(`${BaseUrl}Users/`, {
+      .get(`${BaseUrl}/Users/`, {
         headers: { Authorization: `Bearer ${localStorage.getItem("userTkn")}` },
         params: {
           pageSize,
@@ -103,7 +103,15 @@ export default function Users() {
             <div
               className={`text-center fs-1 text-success d-flex  justify-content-center align-items-center bg-light ${css.loadingHieght}`}
             >
-              <Loading />
+              <Hourglass
+                visible={true}
+                height="80"
+                width="80"
+                ariaLabel="hourglass-loading"
+                wrapperStyle={{}}
+                wrapperClass="mt-5"
+                colors={['#306cce', '#72a1ed']}
+              />
             </div>
           ) : usersList.length > 0 ? (
             <div className="table-responsive">
